@@ -7,6 +7,11 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 let shuffledQuestions, currentQuestionIndex
 startButton.addEventListener('click', startGame)
 
+nextButton.addEventListener('click', () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
+
 function startGame(){
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random()- .5)
@@ -37,6 +42,7 @@ function showQuestion(question){
   })
 }
 function resetState(){
+  clearStatusClass(document.body)
   nextButton.classList.add('hide')
   while (answerButtonsElement.firstChild){
     answerButtonsElement.removeChild
@@ -51,7 +57,13 @@ function selectAnswer(e){
   Array.from(answerButtonsElement.children).forEach(button => {
     setStausClass(button, button.dataset.correct)
   })
-  nextButton.classList.remove('hide')
+  if (shuffledQuestions.length > currentQuestionIndex + 1){
+    nextButton.classList.remove('hide')
+  } else {
+    startButton.innerText = 'Restart'
+    startButton.classList.remove('hide')
+  }
+  
 }
 function setStausClass(element, correct){
   clearStatusClass(element)
@@ -65,6 +77,8 @@ function clearStatusClass(element){
   element.classList.remove('correct')
   element.classList.remove('wrong')
 }
+
+//questions
  questions =[
   {
     question: "Which method would you use to find an ID element?",
@@ -74,26 +88,100 @@ function clearStatusClass(element){
       {text: 'getElementsById', correct: true},
       {text: 'getElementbyId', correct: false}
     ],
-  },]
+  },
+
+  {
+    question: "To see if two variables are equal in an if / else statement you would use ____.",
+    answers: [
+      {text: "=", correct: false},
+      {text: "==", correct: true},
+      {text: "'equals'", correct: false},
+      {text:  "!=", correct: false}
+    ],
+  },
+  
+  {
+    question: "Math.random() returns ____.",
+    answers: [
+      {text: "a number between 1 and 9", correct: false},
+      {text:  "a number between 0 and 9", correct: false},
+      {text: "a number between 0 and 1", correct: true},
+      {text: "a number between 0 and 99", correct: false}
+    ],
+  },
+
+  {
+    question: "An array always begins at an index of:",
+    answers: [
+      {text: '-1', correct: false},
+      {text: "1", correct: false},
+      {text: '0', correct: true},
+      {text: "null", correct: false}
+    ],
+  },
+  
+  {
+    question: "WThe appendChild() method places a node as the ____ child.",
+    answers: [
+      {text: "first", correct: false},
+      {text: "last place you left off", correct: false},
+      {text:  "last", correct: true},
+      {text: "random", correct: false}
+    ],
+  },
+ ]
+  // {
+  //   question: "Which method would you use to find an ID element?",
+  //   answers: [
+  //     {text: 'getElementsById', correct: false},
+  //     {text: 'getElementByID', correct: false},
+  //     {text: 'getElementsById', correct: true},
+  //     {text: 'getElementbyId', correct: false}
+  //   ],
+  // },
+  // {
+  //   question: "Which method would you use to find an ID element?",
+  //   answers: [
+  //     {text: 'getElementsById', correct: false},
+  //     {text: 'getElementByID', correct: false},
+  //     {text: 'getElementsById', correct: true},
+  //     {text: 'getElementbyId', correct: false}
+  //   ],
+  // },
+  // {
+  //   question: "Which method would you use to find an ID element?",
+  //   answers: [
+  //     {text: 'getElementsById', correct: false},
+  //     {text: 'getElementByID', correct: false},
+  //     {text: 'getElementsById', correct: true},
+  //     {text: 'getElementbyId', correct: false}
+  //   ],
+  // },
+  // {
+  //   question: "Which method would you use to find an ID element?",
+  //   answers: [
+  //     {text: 'getElementsById', correct: false},
+  //     {text: 'getElementByID', correct: false},
+  //     {text: 'getElementsById', correct: true},
+  //     {text: 'getElementbyId', correct: false}
+  //   ],
+  // },
+  // {
+  //   question: "Which method would you use to find an ID element?",
+  //   answers: [
+  //     {text: 'getElementsById', correct: false},
+  //     {text: 'getElementByID', correct: false},
+  //     {text: 'getElementsById', correct: true},
+  //     {text: 'getElementbyId', correct: false}
+  //   ],
+  // },]
+
+//  
 //   {
-//     title: "To see if two variables are equal in an if / else statement you would use ____.",
-//     choices: ["=", "==", "'equals'", "!="],
-//     answer: "=="
-//   },
-//   {
-//     title: "Math.random() returns ____.",
-//     choices: ["a number between 1 and 9", "a number between 0 and 9", "a number between 0 and 1", "a number between 0 and 99"],
-//     answer: "a number between 0 and 1"
+//    
 //   }, 
 //   {
-//     title: "The appendChild() method places a node as the ____ child.",
-//     choices: ["first", "last place you left off", "random", "last"],
-//     answer: "last"
-//   }, 
-//   {
-//       title: "An array always begins at an index of:",
-//       choices: ["-1", "0", "1", "null"],
-//       answer: "0"
+//       
 //   },
 //   {
 //       title: "A function within an object is called a ____.",
