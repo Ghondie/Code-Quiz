@@ -3,10 +3,33 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+body {
+    padding: 0;
+    margin: 0;  
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
 
 .container {
     width: 800px;
     max-width: 80%;
-    background-color: blue;
+    background-color: grey;
     border-radius: 5px;
+    padding: 10px;
+}
+body.correct {
+    background-color: green;
+}
+body.wrong {
+    background-color: red;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
 }
